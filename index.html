@@ -19,6 +19,7 @@
         font-family: 'Source Sans Pro', sans-serif;
 
         --bright1: rgb(245, 110, 33);
+        --light1:  rgb(245, 170, 110);
         --bright2: rgb(205, 70, 203);
     }
 
@@ -39,6 +40,8 @@
     }
 
     article {
+        display: flex;
+        flex-direction: column;
         padding: 1rem;
         padding-top: 1px;
         border-radius: 8px;
@@ -49,6 +52,24 @@
 
     article:hover {
         border-color: var(--bright1);
+        box-shadow: 0 0 8px 0 rgba(245, 110, 33, 0.6);
+    }
+
+    article h2 {
+        flex-grow: 1;
+    }
+
+    a {
+        color: var(--light1);
+        transition: color 0.2s;
+    }
+    
+    a:visited {
+        color: var(--bright1);
+    }
+    
+    a:hover {
+        color: rgb(220, 200, 200);
     }
 
     @media screen and (min-width: 1024px) {
