@@ -36,6 +36,7 @@ episodes = [
   "Lu and Mark chat with the wonderful Anna O'Bryan.",
   "Lu and Mark chat with 01.ekka and Stepkid.",
   "Lu and Mark chat with dumaresq on the day of the release of No Alarms In Our Curated Worlds.",
+  "No interview this week, just Lu and Mark doing a hot100 retrospective - sampling a variety of #1s through the decades.",
 ]
 
 episodes.each_with_index do |episode, index|
