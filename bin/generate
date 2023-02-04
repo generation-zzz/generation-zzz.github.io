@@ -41,6 +41,7 @@ episodes = [
   "Lu and Mark chat with Sally Seltmann and her daughter Judy.",
   "Lu and Mark get excited about going to see Bikini Kill.",
   "In the wake of Invasion day, Lu and Mark share the sounds of First Nations musicians.",
+  "Tonight, it's the Lu and Mark metal show - multigenerational head banging - sign of the cow and calf, etc",
 ]
 
 episodes.each_with_index do |episode, index|
