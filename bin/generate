@@ -61,6 +61,13 @@ episodes.each_with_index do |episode, index|
       <!DOCTYPE html>
       <html lang="en-AU">
           <head>
+              <script async src="https://www.googletagmanager.com/gtag/js?id=G-9T560F91PF"></script>
+              <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-9T560F91PF');
+              </script>	
               <meta charset="UTF-8">
               <meta content="dark" name="color-scheme">
               <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -95,6 +102,13 @@ episodes.each_slice(13).each_with_index do |season_episodes, season_index|
       <!DOCTYPE html>
       <html lang="en-AU">
           <head>
+              <script async src="https://www.googletagmanager.com/gtag/js?id=G-9T560F91PF"></script>
+              <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-9T560F91PF');
+              </script>	
               <meta charset="UTF-8">
               <meta content="dark" name="color-scheme">
               <meta name="viewport" content="width=device-width, initial-scale=1">
