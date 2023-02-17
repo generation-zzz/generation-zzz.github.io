@@ -43,7 +43,7 @@ episodes = [
   "In the wake of Invasion day, Lu and Mark share the sounds of First Nations musicians.",
   "Tonight, it's the Lu and Mark metal show - multigenerational head banging - sign of the cow and calf, etc",
   "Lu and Mark chat with Eric, a volunteer at Seattle public radio station KEXP",
-  "Lu and Mark playing a whole lot of very new and mostly local releases - some released today and tomorrow.",
+  "Lu and Mark playing a whole lot of very new music released in the last few weeks.",
 ]
 
 episodes.each_with_index do |episode, index|
