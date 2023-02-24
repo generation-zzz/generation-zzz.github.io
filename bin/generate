@@ -44,6 +44,7 @@ episodes = [
   "Tonight, it's the Lu and Mark metal show - multigenerational head banging - sign of the cow and calf, etc",
   "Lu and Mark chat with Eric, a volunteer at Seattle public radio station KEXP",
   "Lu and Mark playing a whole lot of very new music released in the last few weeks.",
+  "Lu and Mark chat with Lyric - an artist from the gold coast who was our guest in episode 10 - on the day of the release of her new song Outdated.",
 ]
 
 episodes.each_with_index do |episode, index|
