@@ -48,6 +48,7 @@ episodes = [
   "This week to celebrate world pride, Lu and Mark play LGBTQIA+ artists from here and the rest of the world.",
   "Lu and Mark play music from upcoming tours and festivals",
   "This week Mark and Lu raid the hotbin and other sources for new releases to demonstrate how close our fingertips are to the pulse, the zeitgeist, etc of modern society",
+  "This week Lu and Mark had a delightful chat with Meanjin artist MJ O'Neill",
 ]
 
 episodes.each_with_index do |episode, index|
