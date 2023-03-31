@@ -49,6 +49,7 @@ episodes = [
   "Lu and Mark play music from upcoming tours and festivals",
   "This week Mark and Lu raid the hotbin and other sources for new releases to demonstrate how close our fingertips are to the pulse, the zeitgeist, etc of modern society",
   "This week Lu and Mark had a delightful chat with Meanjin artist MJ O'Neill",
+  "The show this week is all about celebrating transgender and gender diverse musicians as it is transgender day of visibility.",
 ]
 
 episodes.each_with_index do |episode, index|
