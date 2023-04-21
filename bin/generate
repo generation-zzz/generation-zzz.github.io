@@ -52,6 +52,7 @@ episodes = [
   "The show this week is all about celebrating transgender and gender diverse musicians as it is transgender day of visibility.",
   "It's April Atonement so this week it made sense (to us at least) to play a goth music special with some classics of the genre and also more contemporary local artists",
   "Mudhoney is playing this weekend so this week we went back to the beginning of grunge and from there to contemporary local grunge influenced artists",
+  "This week Lu and Mark chatted with Perth teen rockers Detour - it's the week of the release of their debut EP Say the Word.",
 ]
 
 episodes.each_with_index do |episode, index|
