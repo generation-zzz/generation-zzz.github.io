@@ -54,6 +54,7 @@ episodes = [
   "Mudhoney is playing this weekend so this week we went back to the beginning of grunge and from there to contemporary local grunge influenced artists",
   "This week Lu and Mark chatted with Perth teen rockers Detour - it's the week of the release of their debut EP Say the Word.",
   "This week we raided the hotbin for some exciting new releases including the VOIID debut album which is released ... today!",
+  "This week we play only first nations artists from here and around the country.",
 ]
 
 episodes.each_with_index do |episode, index|
