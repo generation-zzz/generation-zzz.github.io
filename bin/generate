@@ -57,6 +57,7 @@ episodes = [
   "This week we play only first nations artists from here and around the country.",
   "This week we explore the tenuous genre that is \"the\" artists from around the world - artists so bold that they employ the (and not just a) definite article to characterise their work.",
   "This week Lu and Mark take a stroll down the road to Sonic Masala Fest 2023.",
+  "It's our 52nd show! That's a whole12 months. This week the dynamic duo play music created by other duos.",
 ]
 
 episodes.each_with_index do |episode, index|
