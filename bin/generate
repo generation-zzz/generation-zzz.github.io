@@ -59,6 +59,7 @@ episodes = [
   "This week Lu and Mark take a stroll down the road to Sonic Masala Fest 2023.",
   "It's our 52nd show! That's a whole12 months. This week the dynamic duo play music created by other duos.",
   "It is a new day and a new grid - this week, Lu and Mark explore the musical offerings of Japan.",
+  "This week Lu and Mark chat to Pat Trash from Trash and the Treasures.",
 ]
 
 episodes.each_with_index do |episode, index|
