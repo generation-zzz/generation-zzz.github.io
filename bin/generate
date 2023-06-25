@@ -61,6 +61,7 @@ episodes = [
   "It is a new day and a new grid - this week, Lu and Mark explore the musical offerings of Japan.",
   "This week Lu and Mark chat to Pat Trash from Trash and the Treasures.",
   "This week it's Lu's birthday so we play a selection of his favourite metal artists.",
+  "This week we raid the hotbin and play all new releases including Anna O'Bryan's new single which was released just today.",
 ]
 
 episodes.each_with_index do |episode, index|
