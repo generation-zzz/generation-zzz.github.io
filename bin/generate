@@ -62,6 +62,7 @@ episodes = [
   "This week Lu and Mark chat to Pat Trash from Trash and the Treasures.",
   "This week it's Lu's birthday so we play a selection of his favourite metal artists.",
   "This week we raid the hotbin and play all new releases including Anna O'Bryan's new single which was released just today.",
+  "Today is the last day of Pride Month so this week we celebrate the music of the LGBTQI+ community",
 ]
 
 episodes.each_with_index do |episode, index|
