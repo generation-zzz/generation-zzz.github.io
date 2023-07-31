@@ -66,6 +66,7 @@ episodes = [
   "This week Lu and Mark chat with Doc and the Doom Hippy from the Sunday evening 4ZZZ program Valley of Death - we discuss life, community radio and of course ... metal.",
   "This week Lu and Mark feature new releases both local and afield.",
   "This week Lu and Mark chat with Grace from Joan & The Giants.",
+  "This week Lu and Mark (wearing oven mitts) raid the hot bin and get very excited about new local music releases",
 ]
 
 episodes.each_with_index do |episode, index|
