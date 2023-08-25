@@ -69,6 +69,8 @@ episodes = [
   "This week Lu and Mark (wearing oven mitts) raid the hot bin and get very excited about new local music releases",
   "This week Lu picks tracks old and new and we introduce Lu's metal corner (it's a corner and it is filled with metal).",
   "This week Lu and Mark chat with LÂLKA and get very excited about radiothon 2023 and sonic masala.",
+  "This week Lu and Mark wrap up the tenth and final Sonic Marsala and talk radiothon.",
+  "This week Lu and Mark play a disorienting and intoxicating assortment of newly released music.",
 ]
 
 episodes.each_with_index do |episode, index|
