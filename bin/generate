@@ -71,6 +71,7 @@ episodes = [
   "This week Lu and Mark chat with LÂLKA and get very excited about radiothon 2023 and sonic masala.",
   "This week Lu and Mark wrap up the tenth and final Sonic Marsala and talk radiothon.",
   "This week Lu and Mark play a disorienting and intoxicating assortment of newly released music.",
+  "This week Lu and Mark chat with Flamingo Blonde on the day his debut EP Two Trick Pony is released.",
 ]
 
 episodes.each_with_index do |episode, index|
