@@ -73,6 +73,7 @@ episodes = [
   "This week Lu and Mark play a disorienting and intoxicating assortment of newly released music.",
   "This week Lu and Mark chat with Flamingo Blonde on the day his debut EP Two Trick Pony is released.",
   "This week Lu and Mark chat with Layla from FELONY about her recent single release and debut performance at BIGSOUND in Meanjin",
+  "This week Lu and Mark recap BIGSOUND and play some other exciting new releases.",
 ]
 
 episodes.each_with_index do |episode, index|
