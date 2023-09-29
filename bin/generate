@@ -75,6 +75,7 @@ episodes = [
   "This week Lu and Mark chat with Layla from FELONY about her recent single release and debut performance at BIGSOUND in Meanjin",
   "This week Lu and Mark recap BIGSOUND and play some other exciting new releases.",
   "It's Brisbane Pride Festival Fair day tomorrow so Lu and Mark play the music of LGBTIQ+ artists from Meanjin and beyond.",
+  "This week Lu and Mark chat with Meanjin punk band PRINK a couple of weeks after their debut EP Precious Cargo was 4ZZZ album of the week.",
 ]
 
 episodes.each_with_index do |episode, index|
