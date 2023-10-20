@@ -78,6 +78,7 @@ episodes = [
   "This week Lu and Mark chat with Meanjin punk band PRINK a couple of weeks after their debut EP Precious Cargo was 4ZZZ album of the week.",
   "This week in anticipation of the Indigenous Voice referendum, Lu and Mark play the music of First Nations artists.",
   "This week Lu and Mark play some of their early community radio favourites",
+  "This week Lu and Mark have a delightful chat with Alison of Sali Eri, Blue Stockings and 4ZZZ fame",
 ]
 
 episodes.each_with_index do |episode, index|
