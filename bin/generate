@@ -79,6 +79,7 @@ episodes = [
   "This week in anticipation of the Indigenous Voice referendum, Lu and Mark play the music of First Nations artists.",
   "This week Lu and Mark play some of their early community radio favourites",
   "This week Lu and Mark have a delightful chat with Alison of Sali Eri, Blue Stockings and 4ZZZ fame",
+  "This week Mark and Lu play some spooky goth music - be afraid - be somewhat afraid.",
 ]
 
 episodes.each_with_index do |episode, index|
