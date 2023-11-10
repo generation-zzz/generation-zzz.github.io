@@ -80,6 +80,7 @@ episodes = [
   "This week Lu and Mark play some of their early community radio favourites",
   "This week Lu and Mark have a delightful chat with Alison of Sali Eri, Blue Stockings and 4ZZZ fame",
   "This week Mark and Lu play some spooky goth music - be afraid - be somewhat afraid.",
+  "This week Lu and Mark chat about life and music with Tony and Lola.",
 ]
 
 episodes.each_with_index do |episode, index|
