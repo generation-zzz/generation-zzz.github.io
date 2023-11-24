@@ -82,6 +82,8 @@ episodes = [
   "This week Mark and Lu play some spooky goth music - be afraid - be somewhat afraid.",
   "This week Lu and Mark reminisce about the Teen Jesus and the Jean Teasers album launch show at the Triffid and get involved in the Hot Singles in Your Area 4ZZZ music library initiative.",
   "This week Lu and Mark chat about life and music with Tony and Lola.",
+  "This week Lu and Mark reach into the intense heat of the hotbin to play the hottest of the hot new music.",
+  "This week Lu and Mark honour Trans Day of Remembrance by playing music from local and Australian trans artists.",
 ]
 
 episodes.each_with_index do |episode, index|
