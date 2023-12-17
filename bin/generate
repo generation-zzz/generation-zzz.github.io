@@ -86,6 +86,7 @@ episodes = [
   "This week Lu and Mark honour Trans Day of Remembrance by playing music from local and Australian trans artists.",
   "This week Lu and Mark chat with Emma from June Low a week before the single launch of Wild Loving Heart at the Cave Inn.",
   "This week Lu and Mark play a selection of their short list for the 2023 hot 100.",
+  "This week Lu and Mark chat with Jake from Clowns shortly after the release of their album Endless",
 ]
 
 episodes.each_with_index do |episode, index|
