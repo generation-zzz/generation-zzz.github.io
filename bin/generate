@@ -87,6 +87,7 @@ episodes = [
   "This week Lu and Mark chat with Emma from June Low a week before the single launch of Wild Loving Heart at the Cave Inn.",
   "This week Lu and Mark play a selection of their short list for the 2023 hot 100.",
   "This week Lu and Mark chat with Jake from Clowns shortly after the release of their album Endless",
+  "This week Lu and Mark cover part two of their extensive hot 100 shortlist - 2023 has some great releases and decisions are really difficult.",
 ]
 
 episodes.each_with_index do |episode, index|
