@@ -89,6 +89,7 @@ episodes = [
   "This week Lu and Mark chat with Jake from Clowns shortly after the release of their album Endless",
   "This week Lu and Mark cover part two of their extensive hot 100 shortlist - 2023 has some great releases and decisions are really difficult.",
   "On the last show for 2023, Lu and Mark countdown their favourite albums of the year.",
+  "This week Lu and Mark welcome 2024 with a visit to Lu's metal corner and some reminiscences about the hot 100 countdown on New Year's Day.",
 ]
 
 episodes.each_with_index do |episode, index|
