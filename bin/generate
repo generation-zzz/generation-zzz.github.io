@@ -91,6 +91,7 @@ episodes = [
   "On the last show for 2023, Lu and Mark countdown their favourite albums of the year.",
   "This week Lu and Mark welcome 2024 with a visit to Lu's metal corner and some reminiscences about the hot 100 countdown on New Year's Day.",
   "This week Lu and Mark play their favourite first nations artists from Meanjin and beyond.",
+  "This week Lu and Mark have a lovely chat with Naarm artist Moses Leigh Jones.",
 ]
 
 episodes.each_with_index do |episode, index|
