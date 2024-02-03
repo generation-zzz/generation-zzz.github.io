@@ -93,6 +93,7 @@ episodes = [
   "This week Lu and Mark play their favourite first nations artists from Meanjin and beyond.",
   "This week Lu and Mark have a lovely chat with Naarm artist Moses Leigh Jones.",
   "This week the show is broadcast on Invasion day and so Lu and Mark exclusively play music from first nations artists - sovereignty was never ceded and we are producing the show from stolen land.",
+  "This week Lu and Mark play the freshest of the fresh local music (with a couple from further afield).",
 ]
 
 episodes.each_with_index do |episode, index|
