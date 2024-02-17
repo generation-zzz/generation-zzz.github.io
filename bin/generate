@@ -95,6 +95,7 @@ episodes = [
   "This week the show is broadcast on Invasion day and so Lu and Mark exclusively play music from first nations artists - sovereignty was never ceded and we are producing the show from stolen land.",
   "This week Lu and Mark play the freshest of the fresh local music (with a couple from further afield).",
   "This week Messieurs Lu and Mark chat with Beck from The Melancholics in the week following the release of their debut single.",
+  "This week Lu and Mark raid the February hotbin - it might be a short month but there is so much great new music.",
 ]
 
 episodes.each_with_index do |episode, index|
