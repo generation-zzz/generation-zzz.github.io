@@ -96,6 +96,7 @@ episodes = [
   "This week Lu and Mark play the freshest of the fresh local music (with a couple from further afield).",
   "This week Messieurs Lu and Mark chat with Beck from The Melancholics in the week following the release of their debut single.",
   "This week Lu and Mark raid the February hotbin - it might be a short month but there is so much great new music.",
+  "This week Lu and Mark preview some of the many many excellent live performances soon to be happening in Meanjin.",
 ]
 
 episodes.each_with_index do |episode, index|
