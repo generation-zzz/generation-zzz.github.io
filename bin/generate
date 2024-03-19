@@ -138,7 +138,7 @@ episodes.each_with_index do |episode, index|
           <body>
               <h1><a href="/"><img style="clip-path: circle(); vertical-align: middle" height="50" src="/logo.jpeg" alt="Generation ZZZ Logo"></a> Season #{season_number} - Episode #{episode_number} - #{date}</h1>
               <p>#{episode}</p>
-              <p><audio controls src="https://zeddigital.blob.core.windows.net/zed-digital/ZD-#{date}-19-00.mp3"></audio></p>
+              <p><audio controls src="https://undead.4zzz.fm/zed-digital/ZD-#{date}-19-00.mp3"></audio></p>
               <p><a href="https://4zzz.org.au/program/generation-zzz/#{date}%2019:00:00">Track Information</a></p>
           </body>
       </html>
