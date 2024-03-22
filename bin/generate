@@ -100,6 +100,7 @@ episodes = [
   "This week Lu and Mark reminisce about the incredible Meanjin music community that all turned out to help Platonic Sex raise some money to replace their stolen equipment and Lu celebrates releasing episode one of zedyouth.",
   "This week Lu and Mark are still very excited about the Wednesday gig at Season Three last Sunday and then they visit the local music scene in 1993",
   "This week Lu and Mark chat with Meanjin first nations hip hop artist and fellow 4ZZZ host Cuckoo Coco.",
+  "This week Lu and Mark have a delightful chat with Katie Wighton.",
 ]
 
 episodes.each_with_index do |episode, index|
