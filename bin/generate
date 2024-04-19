@@ -101,6 +101,10 @@ episodes = [
   "This week Lu and Mark are still very excited about the Wednesday gig at Season Three last Sunday and then they visit the local music scene in 1993",
   "This week Lu and Mark chat with Meanjin first nations hip hop artist and fellow 4ZZZ host Cuckoo Coco.",
   "This week Lu and Mark have a delightful chat with Katie Wighton.",
+  "This week is pure metal as Lu and Mark relive their Knotfest experience",
+  "This week Lu and Mark get excited about April Atonement, Access All Areas and also play some releases from 1997.",
+  "This week Lu and Mark peruse the Hot Singles of March and very recent releases.",
+  "This week Lu and Mark chat with Tina and Warwick from Out of Abingdon and feature two songs recorded live at 4ZZZ studio 2.",
 ]
 
 episodes.each_with_index do |episode, index|
