@@ -106,6 +106,7 @@ episodes = [
   "This week Lu and Mark peruse the Hot Singles of March and very recent releases.",
   "This week Lu and Mark chat with Tina and Warwick from Out of Abingdon and feature two songs recorded live at 4ZZZ studio 2.",
   "100 episodes! This week Lu and Mark reminisce about some of our early favourite tracks on the show and also some of the amazing artists we have been lucky enough to speak with about their lives and their music.",
+  "This week Lu and Mark play some very fresh releases including several tracks released this very day.",
 ]
 
 episodes.each_with_index do |episode, index|
