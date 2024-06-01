@@ -109,6 +109,8 @@ episodes = [
   "This week Lu and Mark play some very fresh releases including several tracks released this very day.",
   "This week Lu and Mark chat with Trish from Meanjin DIY band Pink Jelly.",
   "This week Lu and Mark sample some of Steve Albini's enormous volume of diverse recordings - RIP Steve.",
+  "This week Lu and Mark dive into the hotbin and emerge triumphantly holding aloft some hot new releases.",
+  "It's reconciliation week so Lu and Mark highlight the music of first nation artists both local and from further afield.",
 ]
 
 episodes.each_with_index do |episode, index|
