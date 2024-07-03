@@ -111,6 +111,10 @@ episodes = [
   "This week Lu and Mark sample some of Steve Albini's enormous volume of diverse recordings - RIP Steve.",
   "This week Lu and Mark dive into the hotbin and emerge triumphantly holding aloft some hot new releases.",
   "It's reconciliation week so Lu and Mark highlight the music of first nation artists both local and from further afield.",
+  "This week Lu and Mark celebrate two years of Generation ZZZ by playing the Hot Singles from May.",
+  "This week Lu turns 16 so we celebrate by playing some old and new favourites.",
+  "This week Lu and Mark play a selection of music from female and non binary artists.",
+  "This week Lu and Mark continue to persist in not interviewing anyone and playing a lot of cool new music including some brand new music released this very day from Miss Kaninna, blue diner. and Summer Flake.",
 ]
 
 episodes.each_with_index do |episode, index|
