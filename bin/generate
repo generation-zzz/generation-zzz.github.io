@@ -119,7 +119,8 @@ episodes = [
   'It is NAIDOC week! Lu and Mark feature the music of first nations artists.',
   'This week Lu and Mark interview Levi from young Ipswich thrash/punk firebrands, The Distained.',
   'This week Lu and Mark bring the noise - 60 minutes of distressing sounds for your listening pleasure.',
-  'This week Lu and Mark visit the exotic lands of Canada before returning home for some locally released treats.'
+  'This week Lu and Mark visit the exotic lands of Canada before returning home for some locally released treats.',
+  'This week Lu and Mark chat with local artist Ixaras about her music, her label Anti-Dismal, Happy Feet Fest happening September 1st and play a live recording of a brand new unreleased song.'
 ]
 
 episodes.each_with_index do |episode, index|
