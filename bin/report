@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require 'date'
+require 'yaml'
+
+start_date = Date.iso8601('2022-06-03')
+episodes = YAML.load_file('episodes.yml')
+
+episodes.each_with_index do |episode, index|
+  episode_number = index + 1
+  season_number = (episode_number / 13) + 1
+  date = start_date + (index * 7)
+  base = '%03d' % episode_number
+  puts "Season #{season_number}, Episode #{base} - #{date} - #{episode}"
+end
