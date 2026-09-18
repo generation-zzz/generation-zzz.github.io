@@ -1,58 +1,246 @@
-body {
-    margin: 0;
-    padding: 2rem;
-    font-family: 'Noto Serif', serif;
-    font-family: 'Source Sans Pro', sans-serif;
+/* Generation ZZZ - the show goes out at 7pm, so dark is the default and
+   light is the override. The orange and magenta are the logo's. */
 
-    --bright1: rgb(245, 110, 33);
-    --light1:  rgb(245, 170, 110);
-    --bright2: rgb(205, 70, 203);
+:root {
+    --orange:  rgb(245, 110, 33);
+    --apricot: rgb(245, 170, 110);
+    --magenta: rgb(205, 70, 203);
+
+    --bg:      #16110f;
+    --surface: #1f1916;
+    --raised:  #281f1b;
+    --text:    #ede7e3;
+    --muted:   #a4948c;
+    --rule:    rgba(245, 110, 33, 0.22);
+    --shadow:  rgba(0, 0, 0, 0.45);
+
+    --link:       var(--apricot);
+    --link-hover: #fff;
+
+    --measure: 62rem;
+    --gutter: 1.25rem;
 }
 
+@media (prefers-color-scheme: light) {
+    :root {
+        --bg:      #fdf8f5;
+        --surface: #fff;
+        --raised:  #fff;
+        --text:    #221b18;
+        --muted:   #6d605a;
+        --rule:    rgba(245, 110, 33, 0.35);
+        --shadow:  rgba(120, 70, 40, 0.13);
+
+        --link:       #c2470d;
+        --link-hover: #8f3306;
+    }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    padding: 0 var(--gutter) 4rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+}
+
+main, .masthead, footer { max-width: var(--measure); margin-inline: auto; }
+
+a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 2px; transition: color 0.15s; }
+a:hover { color: var(--link-hover); }
+a:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; border-radius: 3px; }
+
+/* ------------------------------------------------------------- masthead */
+
+.masthead { padding: 1.5rem 0 1rem; }
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.brand img { clip-path: circle(); }
+.brand span { font-size: 1.1rem; }
+.brand:hover { color: var(--orange); }
+
+/* ------------------------------------------------------------ headings */
+
 h1 {
-    margin-bottom: 2rem;
-    padding: 1rem 0;
-    border-bottom: 6px double var(--bright1);
+    margin: 0.5rem 0 0.25rem;
+    font-family: 'Noto Serif', Georgia, serif;
+    font-size: clamp(2rem, 6vw, 3rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+}
+
+h1.home {
+    padding-bottom: 1rem;
+    border-bottom: 5px double var(--orange);
 }
 
 h2 {
-    color: var(--bright2);
+    margin: 0 0 0.25rem;
+    font-family: 'Noto Serif', Georgia, serif;
+    font-size: 1.15rem;
+    color: var(--magenta);
 }
 
-article {
-    padding: 1rem;
-    padding-top: 1px;
-    border-radius: 8px;
-    border-bottom: 1px solid transparent;
-    box-shadow: 0 0 8px 0 rgba(245, 110, 33, 0.25);
-    transition: all 0.2s;
+.crumbs { margin: 0; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; }
+.crumbs a { color: var(--muted); text-decoration: none; }
+.crumbs a:hover { color: var(--orange); }
+
+.dateline { margin: 0 0 1.5rem; color: var(--muted); font-size: 0.95rem; }
+.meta { margin: 0.5rem 0 0; color: var(--muted); font-size: 0.85rem; }
+
+.lede { font-size: 1.2rem; }
+.blurb {
+    margin: 0 0 2rem;
+    padding-left: 1rem;
+    border-left: 3px solid var(--orange);
+    font-size: 1.2rem;
 }
 
-article:hover {
-    border-color: var(--bright1);
-    box-shadow: 0 0 8px 0 rgba(245, 110, 33, 0.6);
+.latest a { font-weight: 600; }
+
+/* --------------------------------------------------------------- listen */
+
+.listen { margin-bottom: 2.5rem; }
+.listen audio { width: 100%; max-width: 32rem; }
+.listen p { margin: 0.75rem 0 0; font-size: 0.95rem; }
+
+/* ------------------------------------------------------------ tracklist */
+
+.tracklist { margin-bottom: 2.5rem; }
+
+.tracklist h2 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--rule);
 }
 
-a article:hover {
-    color: rgb(0, 0, 0),
+.tracklist .count {
+    color: var(--muted);
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
 }
 
-a {
-    color: var(--light1);
-    transition: color 0.2s;
+.tracklist ol { margin: 0; padding: 0; list-style: none; counter-reset: track; }
+
+/* a flex row rather than a grid: every li would otherwise be its own grid
+   and size its columns independently, so no two rows lined up */
+.tracklist li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.35rem 0.75rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--rule);
+    counter-increment: track;
 }
 
-a:visited {
-    color: var(--bright1);
+.tracklist li::before {
+    content: counter(track);
+    flex: 0 0 2rem;
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-variant-numeric: tabular-nums;
 }
 
-a:hover {
-    color: rgb(220, 200, 200);
+.track { flex: 1 1 18rem; }
+.track-artist { font-weight: 600; }
+.track-artist::after { content: ' \00b7'; color: var(--muted); font-weight: 400; }
+.track-title { color: var(--muted); }
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-left: auto;
+    padding-left: 2.35rem;
 }
 
-@media screen and (min-width: 1024px) {
-    body {
-        width: 1024px;
-        margin: auto;
-    }
+.tag {
+    padding: 0.05rem 0.5rem;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    color: var(--muted);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+}
+
+/* the show's own reason for being, so these two get the colour */
+.tag-local { border-color: var(--orange); color: var(--orange); }
+.tag-first-nations { border-color: var(--magenta); color: var(--magenta); }
+
+@media (min-width: 40rem) {
+    .tags { padding-left: 0; }
+}
+
+/* ---------------------------------------------------------------- cards */
+
+.cards {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    margin-top: 2rem;
+}
+
+.card { text-decoration: none; color: inherit; }
+
+.card article {
+    height: 100%;
+    padding: 1.1rem 1.25rem;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background: var(--surface);
+    box-shadow: 0 1px 3px var(--shadow);
+    transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+
+.card:hover article {
+    border-color: var(--orange);
+    background: var(--raised);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px var(--shadow);
+}
+
+.card .dateline { margin-bottom: 0.5rem; font-size: 0.85rem; }
+.card p:not(.dateline):not(.meta) { margin: 0; }
+
+/* ---------------------------------------------------------------- pager */
+
+.pager { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2.5rem; }
+.pager .next { margin-left: auto; }
+
+/* --------------------------------------------------------------- footer */
+
+footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; }
+    .card:hover article { transform: none; }
 }

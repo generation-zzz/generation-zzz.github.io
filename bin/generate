@@ -1,108 +1,220 @@
 #!/usr/bin/env ruby
 
+# Builds the whole site from two data files:
+#
+#   episodes.yml - one description per episode, in order. Position is the
+#                  episode number, and the air date follows from it: the show
+#                  has gone out every Friday since 2022-06-03 without a gap.
+#   tracks.yml   - what was played, keyed by episode number. Written by
+#                  bin/tracklists out of the show's play archive. Optional -
+#                  an episode with no entry just renders without a list.
+#
+# Seasons are blocks of thirteen episodes. That is stated once, in SEASON_SIZE
+# and season_of, because it used to be worked out two different ways: episode
+# pages said (number / 13) + 1 while season pages used each_slice(13), so
+# every thirteenth episode claimed a season it was not listed in.
+
+require 'cgi'
 require 'date'
 require 'yaml'
 
-start_date = Date.iso8601('2022-06-03')
-episodes = YAML.load_file('episodes.yml')
+START_DATE = Date.iso8601('2022-06-03')
+SEASON_SIZE = 13
+ANALYTICS_ID = 'G-9T560F91PF'
+TAGLINE = 'Weekly radio show on Meanjin community radio station 4ZZZ'
 
-episodes.each_with_index do |episode, index|
-  episode_number = index + 1
-  season_number = (episode_number / 13) + 1
-  date = start_date + (index * 7)
-  base = '%03d' % episode_number
-  folder = "e#{base}"
-  `mkdir -p #{folder}`
-  path = "#{folder}/index.html"
-  puts "generating #{path} for #{date}"
-  title = "Generation ZZZ - Season #{season_number} - Episode #{episode_number} - #{date}"
-  File.open(path, 'w') do |file|
-    file.puts <<~HTML
-      <!DOCTYPE html>
-      <html lang="en-AU">
-          <head>
-              <script async src="https://www.googletagmanager.com/gtag/js?id=G-9T560F91PF"></script>
-              <script>
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', 'G-9T560F91PF');
-              </script>
-              <meta charset="UTF-8">
-              <meta content="dark" name="color-scheme">
-              <meta name="viewport" content="width=device-width, initial-scale=1">
-              <meta property="og:title" content="#{title}" />
-              <meta property="og:description" content="#{episode}" />
-              <title>#{title}</title>
-              <link rel="preconnect" href="https://fonts.googleapis.com">
-              <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-              <link href="https://fonts.googleapis.com/css2?family=Noto+Serif&family=Source+Sans+Pro:wght@400;700&display=swap" rel="stylesheet">
-              <link rel="stylesheet" type="text/css" href="/styles.css">
-          </head>
-          <body>
-              <h1><a href="/"><img style="clip-path: circle(); vertical-align: middle" height="50" src="/logo.jpeg" alt="Generation ZZZ Logo"></a> Season #{season_number} - Episode #{episode_number} - #{date}</h1>
-              <p>#{episode}</p>
-              <p><audio controls src="https://undead.4zzz.fm/zed-digital/ZD-#{date}-19-00.mp3"></audio></p>
-              <p><a href="https://4zzz.org.au/program/generation-zzz/#{date}%2019:00:00">Track Information</a></p>
-          </body>
-      </html>
-    HTML
-  end
+def season_of(number) = ((number - 1) / SEASON_SIZE) + 1
+def date_of(number) = START_DATE + ((number - 1) * 7)
+def folder_of(number) = format('e%03d', number)
+def season_folder(number) = format('s%03d', number)
+def h(text) = CGI.escapeHTML(text.to_s)
+def pretty(date) = date.strftime('%-d %B %Y')
+
+def write(path, contents)
+  dir = File.dirname(path)
+  Dir.mkdir(dir) unless dir == '.' || Dir.exist?(dir)
+  File.write(path, contents)
 end
 
-episodes.each_slice(13).each_with_index do |season_episodes, season_index|
-  season_number = season_index + 1
-  base = '%03d' % season_number
-  folder = "s#{base}"
-  `mkdir -p #{folder}`
-  path = "#{folder}/index.html"
-  puts "generating #{path}"
-  File.open(path, 'w') do |file|
-    file.puts <<~HTML
-      <!DOCTYPE html>
-      <html lang="en-AU">
-          <head>
-              <script async src="https://www.googletagmanager.com/gtag/js?id=G-9T560F91PF"></script>
-              <script>
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', 'G-9T560F91PF');
-              </script>
-              <meta charset="UTF-8">
-              <meta content="dark" name="color-scheme">
-              <meta name="viewport" content="width=device-width, initial-scale=1">
-              <meta property="og:title" content="Generation ZZZ Season #{season_number}" />
-              <meta property="og:description" content="Weekly radio show on Meanjin community radio station 4ZZZ" />
-              <title>Generation ZZZ Season #{season_number}</title>
-              <link rel="preconnect" href="https://fonts.googleapis.com">
-              <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-              <link href="https://fonts.googleapis.com/css2?family=Noto+Serif&family=Source+Sans+Pro:wght@400;700&display=swap" rel="stylesheet">
-              <link rel="stylesheet" type="text/css" href="/styles.css">
-          </head>
-          <body>
-              <h1><a href="/"><img style="clip-path: circle(); vertical-align: middle" height="50" src="/logo.jpeg" alt="Generation ZZZ Logo"></a> Season #{season_number}</h1>
-              <section aria-title="Season #{season_number} Episodes">
-    HTML
+# every page is the same shell - the only differences are what it is called,
+# what a link preview should say about it, and what is inside it
+def page(title:, description:, body:, heading:)
+  <<~HTML
+    <!DOCTYPE html>
+    <html lang="en-AU">
+        <head>
+            <script async src="https://www.googletagmanager.com/gtag/js?id=#{ANALYTICS_ID}"></script>
+            <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '#{ANALYTICS_ID}');
+            </script>
+            <meta charset="UTF-8">
+            <meta content="dark light" name="color-scheme">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta name="description" content="#{h(description)}">
+            <meta property="og:title" content="#{h(title)}">
+            <meta property="og:description" content="#{h(description)}">
+            <meta property="og:image" content="/logo.jpeg">
+            <meta property="og:type" content="website">
+            <title>#{h(title)}</title>
+            <link rel="icon" href="/favicon.ico">
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@600&family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+            <link rel="stylesheet" type="text/css" href="/styles.css">
+        </head>
+        <body>
+            <header class="masthead">
+                <a class="brand" href="/">
+                    <img src="/logo.jpeg" alt="" width="56" height="56">
+                    <span>Generation ZZZ</span>
+                </a>
+            </header>
+            <main>
+    #{heading}
+    #{body}
+            </main>
+            <footer>
+                <p>Generation ZZZ is broadcast Fridays at 7pm on
+                   <a href="https://4zzz.org.au/program/generation-zzz">4ZZZ 102.1FM</a>, Meanjin.</p>
+            </footer>
+        </body>
+    </html>
+  HTML
+end
 
-    season_episodes.to_enum.with_index.reverse_each do |episode, season_episode_index|
-      episode_index = season_index * 13 + season_episode_index
-      episode_number = episode_index + 1
-      date = start_date + (episode_index * 7)
-      file.puts <<~HTML
-        <a href="/e#{'%03d' % episode_number}" style="text-decoration: none;">
-          <article>
-              <h2>Episode #{episode_number} - #{date}</h2>
-              <p>#{episode}</p>
-          </article>
-        </a>
-      HTML
+def tracklist(entries)
+  return '' if entries.nil? || entries.empty?
+
+  items = entries.map do |track|
+    tags = (track['tags'] || []).map do |tag|
+      %(<span class="tag tag-#{tag.tr(' ', '-')}">#{h(tag)}</span>)
     end
-
-    file.puts <<~HTML
-              </section>
-          </body>
-      </html>
+    tagged = tags.empty? ? '' : %(<span class="tags">#{tags.join}</span>)
+    <<~HTML
+      <li>
+          <span class="track">
+              <span class="track-artist">#{h(track['artist'])}</span>
+              <span class="track-title">#{h(track['title'])}</span>
+          </span>
+          #{tagged}
+      </li>
     HTML
   end
+
+  <<~HTML
+    <section class="tracklist">
+        <h2>What we played <span class="count">#{entries.length} tracks</span></h2>
+        <ol>
+    #{items.join}
+        </ol>
+    </section>
+  HTML
 end
+
+episodes = YAML.load_file('episodes.yml')
+tracks = File.exist?('tracks.yml') ? YAML.load_file('tracks.yml') : {}
+
+# ---------------------------------------------------------------- episodes
+
+episodes.each_with_index do |description, index|
+  number = index + 1
+  season = season_of(number)
+  date = date_of(number)
+
+  previous_link = number > 1 ? %(<a class="prev" href="/#{folder_of(number - 1)}">Episode #{number - 1}</a>) : ''
+  next_link = number < episodes.length ? %(<a class="next" href="/#{folder_of(number + 1)}">Episode #{number + 1}</a>) : ''
+
+  heading = <<~HTML
+    <p class="crumbs"><a href="/#{season_folder(season)}">Season #{season}</a></p>
+    <h1>Episode #{number}</h1>
+    <p class="dateline"><time datetime="#{date}">#{pretty(date)}</time></p>
+  HTML
+
+  body = <<~HTML
+    <p class="blurb">#{h(description)}</p>
+    <div class="listen">
+        <audio controls preload="none" src="https://undead.4zzz.fm/zed-digital/ZD-#{date}-19-00.mp3"></audio>
+        <p><a href="https://4zzz.org.au/program/generation-zzz/#{date}%2019:00:00">Track information on 4ZZZ</a></p>
+    </div>
+    #{tracklist(tracks[number])}
+    <nav class="pager">#{previous_link}#{next_link}</nav>
+  HTML
+
+  write("#{folder_of(number)}/index.html",
+        page(title: "Generation ZZZ - Season #{season} - Episode #{number} - #{date}",
+             description: description, heading: heading, body: body))
+end
+
+# ----------------------------------------------------------------- seasons
+
+seasons = episodes.each_slice(SEASON_SIZE).to_a
+
+seasons.each_with_index do |season_episodes, season_index|
+  season = season_index + 1
+  first = season_index * SEASON_SIZE + 1
+  last = first + season_episodes.length - 1
+
+  cards = (first..last).to_a.reverse.map do |number|
+    played = tracks[number]
+    <<~HTML
+      <a class="card" href="/#{folder_of(number)}">
+          <article>
+              <h2>Episode #{number}</h2>
+              <p class="dateline"><time datetime="#{date_of(number)}">#{pretty(date_of(number))}</time></p>
+              <p>#{h(episodes[number - 1])}</p>
+              #{played ? %(<p class="meta">#{played.length} tracks</p>) : ''}
+          </article>
+      </a>
+    HTML
+  end
+
+  heading = <<~HTML
+    <p class="crumbs"><a href="/">All seasons</a></p>
+    <h1>Season #{season}</h1>
+    <p class="dateline">#{pretty(date_of(first))} to #{pretty(date_of(last))}</p>
+  HTML
+
+  write("#{season_folder(season)}/index.html",
+        page(title: "Generation ZZZ Season #{season}",
+             description: "Episodes #{first} to #{last} of Generation ZZZ, " \
+                          "#{pretty(date_of(first))} to #{pretty(date_of(last))}.",
+             heading: heading,
+             body: %(<section class="cards">\n#{cards.join}</section>)))
+end
+
+# ------------------------------------------------------------------- index
+
+latest = episodes.length
+season_cards = seasons.each_with_index.to_a.reverse.map do |_season_episodes, season_index|
+  season = season_index + 1
+  first = season_index * SEASON_SIZE + 1
+  last = [first + SEASON_SIZE - 1, episodes.length].min
+  <<~HTML
+    <a class="card" href="/#{season_folder(season)}">
+        <article>
+            <h2>Season #{season}</h2>
+            <p class="dateline">#{pretty(date_of(first))} to #{pretty(date_of(last))}</p>
+            <p class="meta">Episodes #{first}&ndash;#{last}</p>
+        </article>
+    </a>
+  HTML
+end
+
+intro = <<~HTML
+  <p class="lede">Generation ZZZ is a weekly radio show on Meanjin community radio station
+     <a href="https://4zzz.org.au/program/generation-zzz">4ZZZ</a>.</p>
+  <p>Mark (the parent - he/him) and Lu (the kid - he/him) discuss the multigenerational
+     experience of music and community radio.</p>
+  <p class="latest"><a href="/#{folder_of(latest)}">Latest episode: #{latest}, #{pretty(date_of(latest))}</a></p>
+HTML
+
+write('index.html',
+      page(title: 'Generation ZZZ',
+           description: TAGLINE,
+           heading: %(<h1 class="home">Generation ZZZ</h1>),
+           body: %(#{intro}<section class="cards" aria-label="Seasons">\n#{season_cards.join}</section>)))
+
+puts "#{episodes.length} episodes, #{seasons.length} seasons, #{tracks.values.sum(&:length)} tracks listed"

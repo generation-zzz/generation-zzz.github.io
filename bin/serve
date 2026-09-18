@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+# Serves the built site so you can look at it before pushing.
+#
+#   bin/serve [port]
+#
+# Opening index.html straight off disk does not work: the pages link to
+# /styles.css, /logo.jpeg and /e224 - absolute paths, which over file://
+# resolve against the root of your disk rather than the root of the site.
+# Absolute is what GitHub Pages wants, so the fix is to serve it locally
+# rather than to make the links relative.
+
+port = (ARGV[0] || 8000).to_i
+root = File.expand_path('..', __dir__)
+puts "http://localhost:#{port}/ - ctrl-c to stop"
+exec 'ruby', '-run', '-e', 'httpd', '--', root, '-p', port.to_s
