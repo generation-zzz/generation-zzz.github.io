@@ -6,8 +6,14 @@
 #                  episode number, and the air date follows from it: the show
 #                  has gone out every Friday since 2022-06-03 without a gap.
 #   tracks.yml   - what was played, keyed by episode number. Written by
-#                  bin/tracklists out of the show's play archive. Optional -
+#                  bin/export out of the show's play archive. Optional -
 #                  an episode with no entry just renders without a list.
+#   guests.yml   - who was interviewed, and which episodes they were on. The
+#                  name is wrapped in ** so it can be picked out of the prose.
+#   playable.yml - the episodes 4ZZZ is still serving audio for. Written by
+#                  bin/playable. Absent means none: the licence only covers
+#                  streaming for a couple of months, so a player must never
+#                  appear on an episode that has dropped off.
 #
 # Seasons are blocks of thirteen episodes. That is stated once, in SEASON_SIZE
 # and season_of, because it used to be worked out two different ways: episode
@@ -140,6 +146,7 @@ end
 
 episodes = YAML.load_file('episodes.yml')
 tracks = File.exist?('tracks.yml') ? YAML.load_file('tracks.yml') : {}
+playable = File.exist?('playable.yml') ? Array(YAML.load_file('playable.yml')) : []
 
 # ---------------------------------------------------------------- episodes
 
@@ -157,10 +164,19 @@ episodes.each_with_index do |description, index|
     <p class="dateline"><time datetime="#{date}">#{pretty(date)}</time></p>
   HTML
 
+  # 4ZZZ's licence only covers streaming an episode for a couple of months,
+  # and Zed Digital stops serving it after that, so an older episode gets no
+  # player rather than a broken one
+  listen = if playable.include?(number)
+             %(<audio controls preload="none" src="https://undead.4zzz.fm/zed-digital/ZD-#{date}-19-00.mp3"></audio>)
+           else
+             %(<p class="unavailable">4ZZZ can only stream an episode for a couple of months, so this one is no longer available to play.</p>)
+           end
+
   body = <<~HTML
     <p class="blurb">#{h(description)}</p>
     <div class="listen">
-        <audio controls preload="none" src="https://undead.4zzz.fm/zed-digital/ZD-#{date}-19-00.mp3"></audio>
+        #{listen}
         <p><a href="https://4zzz.org.au/program/generation-zzz/#{date}%2019:00:00">Track information on 4ZZZ</a></p>
     </div>
     #{tracklist(tracks[number])}
@@ -207,6 +223,46 @@ seasons.each_with_index do |season_episodes, season_index|
                           "#{pretty(date_of(first))} to #{pretty(date_of(last))}.",
              heading: heading,
              body: %(<section class="cards">\n#{cards.join}</section>)))
+end
+
+# ------------------------------------------------------------------ guests
+
+guests = File.exist?('guests.yml') ? YAML.load_file('guests.yml') : {}
+
+unless guests.empty?
+  # the name is wrapped in ** inside the phrase, so it can be picked out
+  # while keeping the words around it - "Meanjin punk band PRINK" reads
+  # better on a page than "PRINK" alone, but it is PRINK you are looking for
+  entries = guests.map do |phrase, numbers|
+    before, name, after = phrase.split('**', 3)
+    name, after = [before, ''] if name.nil?
+    [name.to_s, before.to_s, after.to_s, Array(numbers).sort]
+  end.sort_by { |name, _, _, _| name.downcase }
+
+  items = entries.map do |name, before, after, numbers|
+    links = numbers.map do |number|
+      %(<a href="/#{folder_of(number)}">#{number}<span class="ep-date">#{date_of(number).strftime('%b %Y')}</span></a>)
+    end
+    <<~HTML
+      <li>
+          <span class="guest">#{h(before)}<strong>#{h(name)}</strong>#{h(after)}</span>
+          <span class="guest-episodes">#{links.join}</span>
+      </li>
+    HTML
+  end
+
+  returning = entries.count { |_, _, _, numbers| numbers.length > 1 }
+  body = <<~HTML
+    <p class="lede">Everyone who has come on the show for a chat, and the episodes they were on.</p>
+    <section class="guests"><ul>#{items.join}</ul></section>
+    <p class="footnote">#{entries.length} guests across #{entries.sum { |_, _, _, n| n.length }} episodes#{returning.positive? ? ", #{returning} of them more than once" : ''}.</p>
+  HTML
+
+  write('guests/index.html',
+        page(title: 'Generation ZZZ - guests',
+             description: "Everyone interviewed on Generation ZZZ - #{entries.length} guests across #{entries.sum { |_, _, _, n| n.length }} episodes.",
+             heading: %(<p class="crumbs"><a href="/">Home</a></p>\n<h1>Guests</h1>),
+             body: body))
 end
 
 # ------------------------------------------------------------------- stats
@@ -338,6 +394,7 @@ intro = <<~HTML
   <p>Mark (the parent - he/him) and Lu (the kid - he/him) discuss the multigenerational
      experience of music and community radio.</p>
   <p class="latest"><a href="/#{folder_of(latest)}">Latest episode: #{latest}, #{pretty(date_of(latest))}</a>
+     <span class="sep">·</span> <a href="/guests">Guests</a>
      <span class="sep">·</span> <a href="/stats">The numbers</a></p>
 HTML
 

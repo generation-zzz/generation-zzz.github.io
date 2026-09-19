@@ -1,0 +1,53 @@
+#!/usr/bin/env ruby
+
+# Works out which episodes 4ZZZ is still serving audio for, and records it in
+# playable.yml so bin/generate only puts a player on those.
+#
+#   bin/playable
+#
+# 4ZZZ's licence only covers streaming an episode for a couple of months, and
+# Zed Digital drops it after that - a 2022 episode 404s. Putting a player on
+# every page offered something that could not legally or actually be played.
+#
+# An episode only ever goes from playable to not: nothing comes back. So this
+# checks the ones currently believed playable, plus any episode newer than
+# them, and nothing else. That is about a dozen requests rather than one per
+# episode, and in the steady state one episode drops off a week.
+
+require 'date'
+require 'yaml'
+
+START_DATE = Date.iso8601('2022-06-03')
+SEED = 16 # how far back to look the first time, before there is anything to go on
+
+def date_of(number) = START_DATE + ((number - 1) * 7)
+def url_for(number) = "https://undead.4zzz.fm/zed-digital/ZD-#{date_of(number)}-19-00.mp3"
+
+def playable?(number)
+  code = `curl -s -o /dev/null -w "%{http_code}" --max-time 20 --head "#{url_for(number)}"`.strip
+  code == '200'
+end
+
+episodes = YAML.load_file('episodes.yml')
+latest = episodes.length
+known = File.exist?('playable.yml') ? Array(YAML.load_file('playable.yml')) : []
+
+# everything we thought was playable, and everything newer than the oldest of
+# those - which on a first run is just the last SEED episodes
+oldest = known.min || [latest - SEED + 1, 1].max
+candidates = (oldest..latest).to_a
+
+puts "checking #{candidates.length} episodes (#{candidates.first} to #{candidates.last})"
+still = candidates.select do |number|
+  ok = playable?(number)
+  puts format('  ep %3d  %s  %s', number, date_of(number), ok ? 'playable' : 'gone')
+  sleep 1
+  ok
+end
+
+gone = known - still
+File.write('playable.yml', still.sort.to_yaml)
+puts
+puts "#{still.length} episodes playable (#{still.min} to #{still.max})" unless still.empty?
+puts 'nothing is playable' if still.empty?
+puts "dropped off since last time: #{gone.sort.join(', ')}" unless gone.empty?

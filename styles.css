@@ -349,3 +349,41 @@ footer {
    this - so the table scrolls rather than the page */
 .scroller { overflow-x: auto; }
 .scroller .years { min-width: 34rem; }
+
+.unavailable { margin: 0; color: var(--muted); font-size: 0.95rem; font-style: italic; }
+
+/* ----------------------------------------------------------------- guests */
+
+.guests ul { margin: 2rem 0 0; padding: 0; list-style: none; }
+
+.guests li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 1rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--rule);
+}
+
+.guest { flex: 1 1 20rem; }
+.guest strong { font-weight: 700; }
+.guest { color: var(--muted); }
+.guest strong { color: var(--text); }
+
+.guest-episodes { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-left: auto; }
+
+.guest-episodes a {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    padding: 0.1rem 0.55rem;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    color: var(--orange);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.guest-episodes a:hover { border-color: var(--orange); background: var(--surface); }
+.ep-date { color: var(--muted); font-size: 0.75rem; }
