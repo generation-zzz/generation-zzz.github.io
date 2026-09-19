@@ -27,7 +27,7 @@ require 'yaml'
 START_DATE = Date.iso8601('2022-06-03')
 SEASON_SIZE = 13
 ANALYTICS_ID = 'G-9T560F91PF'
-TAGLINE = 'Weekly radio show on Meanjin community radio station 4ZZZ'
+TAGLINE = 'Weekly radio show on Zed Digital, the digital station of 4ZZZ in Meanjin'
 
 def season_of(number) = ((number - 1) / SEASON_SIZE) + 1
 def date_of(number) = START_DATE + ((number - 1) * 7)
@@ -108,7 +108,8 @@ def page(title:, description:, body:, heading:)
             </main>
             <footer>
                 <p>Generation ZZZ is broadcast Fridays at 7pm on
-                   <a href="https://4zzz.org.au/program/generation-zzz">4ZZZ 102.1FM</a>, Meanjin.</p>
+                   <a href="https://4zzz.org.au/grid/ZD">Zed Digital</a>, the digital station of
+                   <a href="https://4zzz.org.au">4ZZZ</a>, Meanjin.</p>
             </footer>
         </body>
     </html>
@@ -389,8 +390,9 @@ season_cards = seasons.each_with_index.to_a.reverse.map do |_season_episodes, se
 end
 
 intro = <<~HTML
-  <p class="lede">Generation ZZZ is a weekly radio show on Meanjin community radio station
-     <a href="https://4zzz.org.au/program/generation-zzz">4ZZZ</a>.</p>
+  <p class="lede">Generation ZZZ is a weekly radio show on <a href="https://4zzz.org.au/grid/ZD">Zed
+     Digital</a>, the digital station of Meanjin community radio station
+     <a href="https://4zzz.org.au">4ZZZ</a>.</p>
   <p>Mark (the parent - he/him) and Lu (the kid - he/him) discuss the multigenerational
      experience of music and community radio.</p>
   <p class="latest"><a href="/#{folder_of(latest)}">Latest episode: #{latest}, #{pretty(date_of(latest))}</a>
