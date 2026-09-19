@@ -244,3 +244,108 @@ footer {
     *, *::before, *::after { transition: none !important; }
     .card:hover article { transform: none; }
 }
+
+/* ---------------------------------------------------------------- numbers */
+
+.tally {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+    gap: 1rem;
+    margin: 2rem 0 2.5rem;
+}
+
+.tally div {
+    padding: 1rem;
+    border-radius: 10px;
+    background: var(--surface);
+    box-shadow: 0 1px 3px var(--shadow);
+    text-align: center;
+}
+
+.tally strong {
+    display: block;
+    font-family: 'Noto Serif', Georgia, serif;
+    font-size: 1.9rem;
+    line-height: 1.1;
+    color: var(--orange);
+}
+
+.tally span { color: var(--muted); font-size: 0.85rem; }
+
+.meter {
+    display: grid;
+    grid-template-columns: 9rem 1fr 3.5rem;
+    gap: 0.75rem;
+    align-items: center;
+    margin-bottom: 0.6rem;
+}
+
+.meter-track { height: 0.85rem; border-radius: 999px; background: var(--surface); overflow: hidden; }
+.meter-fill { height: 100%; border-radius: 999px; background: var(--orange); }
+.meter-first-nations { background: var(--magenta); }
+.meter-female { background: rgb(235, 110, 140); }
+.meter-gender-diverse { background: rgb(150, 120, 230); }
+.meter-australian { background: rgb(220, 175, 70); }
+.meter-value { color: var(--muted); font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+.meter-label { font-size: 0.9rem; }
+
+.years { width: 100%; border-collapse: collapse; margin-bottom: 1rem; font-variant-numeric: tabular-nums; }
+.years th, .years td { padding: 0.45rem 0.5rem; text-align: right; border-bottom: 1px solid var(--rule); }
+.years th[scope="col"] { color: var(--muted); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.years th[scope="row"] { text-align: left; }
+.years .muted { color: var(--muted); }
+
+.leaderboard ol { margin: 0; padding: 0; list-style: none; }
+
+.leaderboard li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 2rem 1fr auto;
+    gap: 0.75rem;
+    align-items: baseline;
+    padding: 0.5rem 0.6rem;
+    border-bottom: 1px solid var(--rule);
+}
+
+/* the bar sits behind the label rather than beside it, so a long song title
+   still gets the full width to wrap into */
+.leaderboard .leader-bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 4px;
+    background: rgba(245, 110, 33, 0.16);
+}
+
+.leaderboard .rank, .leaderboard .leader-label, .leaderboard .leader-count { position: relative; }
+.leaderboard .rank { color: var(--muted); font-size: 0.8rem; font-variant-numeric: tabular-nums; }
+.leaderboard .leader-count { color: var(--orange); font-variant-numeric: tabular-nums; font-weight: 600; }
+.leaderboard .sep { color: var(--muted); }
+
+.footnote { margin-top: 1rem; color: var(--muted); font-size: 0.85rem; }
+
+.leaderboard h2 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--rule);
+}
+
+.leaderboard .count {
+    color: var(--muted);
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.leaderboard { margin-bottom: 2.5rem; }
+
+/* seven columns will not fit a phone, and a table is the honest shape for
+   this - so the table scrolls rather than the page */
+.scroller { overflow-x: auto; }
+.scroller .years { min-width: 34rem; }

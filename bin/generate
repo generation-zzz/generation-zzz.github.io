@@ -30,6 +30,30 @@ def season_folder(number) = format('s%03d', number)
 def h(text) = CGI.escapeHTML(text.to_s)
 def pretty(date) = date.strftime('%-d %B %Y')
 
+# The same song goes into the playlist spelled differently week to week, so
+# the charts count a folded form of the artist and title: "Hate Crimes (at
+# Paramount)", "... (Single)" and "... (at paramount)" are one song played
+# eleven times. This is the zzz gem's Matcher.fold, repeated rather than
+# shared because this repository builds on its own from a clone.
+def fold(text)
+  text.to_s.downcase
+      .gsub(/\s*\((single|ep|deluxe|remaster(ed)?|live|explicit)[^)]*\)/, '')
+      .gsub(/\s+(feat\.?|ft\.?|featuring|with)\s+.*\z/, '')
+      .gsub(/['\u2018\u2019`]/, '')
+      .gsub(/\s*&\s*/, ' and ')
+      .gsub(/[^a-z0-9]+/, ' ')
+      .strip
+      .sub(/\Athe /, '')
+end
+
+# tracks.yml drops "australian" from a track already marked local, because
+# saying both on every local track buries the tags that tell you something -
+# so local has to be counted back in here
+def has?(track, tag)
+  tags = track['tags'] || []
+  tags.include?(tag) || (tag == 'australian' && tags.include?('local'))
+end
+
 def write(path, contents)
   dir = File.dirname(path)
   Dir.mkdir(dir) unless dir == '.' || Dir.exist?(dir)
@@ -185,6 +209,111 @@ seasons.each_with_index do |season_episodes, season_index|
              body: %(<section class="cards">\n#{cards.join}</section>)))
 end
 
+# ------------------------------------------------------------------- stats
+
+FLAGS = [%w[australian Australian], %w[local Local], %w[female Female],
+         ['gender diverse', 'Gender diverse'], ['first nations', 'First Nations']].freeze
+
+all_played = tracks.flat_map { |number, played| played.map { |t| t.merge('episode' => number) } }
+
+def meter(label, count, total, slug)
+  share = total.zero? ? 0 : 100.0 * count / total
+  <<~HTML
+    <div class="meter">
+        <div class="meter-label">#{h(label)}</div>
+        <div class="meter-track"><div class="meter-fill meter-#{slug}" style="width: #{share.round(1)}%"></div></div>
+        <div class="meter-value">#{format('%.1f%%', share)}</div>
+    </div>
+  HTML
+end
+
+def leaderboard(rows, heading, total_label)
+  highest = rows.first&.last.to_i
+  items = rows.each_with_index.map do |(label, count), index|
+    width = highest.zero? ? 0 : 100.0 * count / highest
+    <<~HTML
+      <li>
+          <span class="rank">#{index + 1}</span>
+          <span class="leader-bar" style="width: #{width.round(1)}%"></span>
+          <span class="leader-label">#{label}</span>
+          <span class="leader-count">#{count}</span>
+      </li>
+    HTML
+  end
+  %(<section class="leaderboard"><h2>#{h(heading)} <span class="count">#{total_label}</span></h2>\n) +
+    %(<ol>\n#{items.join}</ol></section>\n)
+end
+
+# counted on the folded form, and shown under whichever spelling was used most
+def chart_of(played, limit)
+  played.group_by { |track| yield(track) }.map do |_, group|
+    label = group.group_by { |t| yield(t, :label) }.max_by { |_, g| g.length }.first
+    [label, group.length]
+  end.sort_by { |label, count| [-count, label.downcase] }.first(limit)
+end
+
+total = all_played.length
+by_year = all_played.group_by { |track| date_of(track['episode']).year }
+
+quota_rows = FLAGS.map do |tag, label|
+  meter(label, all_played.count { |track| has?(track, tag) }, total, tag.tr(' ', '-'))
+end
+
+year_rows = by_year.keys.sort.map do |year|
+  played = by_year[year]
+  cells = FLAGS.map do |tag, _|
+    share = 100.0 * played.count { |track| has?(track, tag) } / played.length
+    %(<td>#{format('%.0f%%', share)}</td>)
+  end
+  %(<tr><th scope="row">#{year}</th><td class="muted">#{played.length}</td>#{cells.join}</tr>)
+end
+
+top_tracks = chart_of(all_played, 20) { |t, mode| mode ? "#{h(t['artist'])} <span class=\"sep\">·</span> #{h(t['title'])}" : [fold(t['artist']), fold(t['title'])] }
+top_artists = chart_of(all_played, 20) { |t, mode| mode ? h(t['artist']) : fold(t['artist']) }
+
+songs = all_played.map { |t| [fold(t['artist']), fold(t['title'])] }.uniq.length
+artists = all_played.map { |t| fold(t['artist']) }.uniq.length
+tagged = all_played.count { |t| t['tags'] }
+
+stats_body = <<~HTML
+  <p class="lede">Every song Generation ZZZ has played since #{pretty(date_of(1))}, counted up.</p>
+  <section class="tally">
+      <div><strong>#{episodes.length}</strong><span>episodes</span></div>
+      <div><strong>#{total}</strong><span>songs played</span></div>
+      <div><strong>#{songs}</strong><span>different songs</span></div>
+      <div><strong>#{artists}</strong><span>different artists</span></div>
+  </section>
+
+  <section>
+      <h2>The 4ZZZ content quotas</h2>
+      #{quota_rows.join}
+      <p class="footnote">4ZZZ counts female and gender diverse as a single quota, which comes to
+         #{format('%.1f%%', 100.0 * all_played.count { |t| has?(t, 'female') || has?(t, 'gender diverse') } / total)}.
+         Of #{total} songs, #{tagged} carry at least one of these. A song with none is one whose release
+         we could not identify in the 4ZZZ library - not one where the answer is no, so these are floors
+         rather than exact counts.</p>
+  </section>
+
+  <section>
+      <h2>Year by year</h2>
+      <div class="scroller">
+      <table class="years">
+          <thead><tr><th scope="col">Year</th><th scope="col">Songs</th>#{FLAGS.map { |_, l| "<th scope=\"col\">#{l}</th>" }.join}</tr></thead>
+          <tbody>#{year_rows.join}</tbody>
+      </table>
+      </div>
+  </section>
+
+  #{leaderboard(top_tracks, 'Most played songs', 'spellings folded together')}
+  #{leaderboard(top_artists, 'Most played artists', "of #{artists}")}
+HTML
+
+write('stats/index.html',
+      page(title: 'Generation ZZZ - the numbers',
+           description: "#{episodes.length} episodes, #{total} songs played, and how they measure up to 4ZZZ's content quotas.",
+           heading: %(<p class="crumbs"><a href="/">Home</a></p>\n<h1>The numbers</h1>),
+           body: stats_body))
+
 # ------------------------------------------------------------------- index
 
 latest = episodes.length
@@ -208,7 +337,8 @@ intro = <<~HTML
      <a href="https://4zzz.org.au/program/generation-zzz">4ZZZ</a>.</p>
   <p>Mark (the parent - he/him) and Lu (the kid - he/him) discuss the multigenerational
      experience of music and community radio.</p>
-  <p class="latest"><a href="/#{folder_of(latest)}">Latest episode: #{latest}, #{pretty(date_of(latest))}</a></p>
+  <p class="latest"><a href="/#{folder_of(latest)}">Latest episode: #{latest}, #{pretty(date_of(latest))}</a>
+     <span class="sep">·</span> <a href="/stats">The numbers</a></p>
 HTML
 
 write('index.html',
