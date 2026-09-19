@@ -387,3 +387,15 @@ footer {
 
 .guest-episodes a:hover { border-color: var(--orange); background: var(--surface); }
 .ep-date { color: var(--muted); font-size: 0.75rem; }
+
+.social { margin: 0.5rem 0 0; }
+
+.social a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    text-decoration: none;
+}
+
+.social a:hover span { text-decoration: underline; }
+.social .icon { flex: 0 0 auto; }
