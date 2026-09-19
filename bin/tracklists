@@ -20,7 +20,7 @@ require 'json'
 require 'yaml'
 
 START_DATE = Date.iso8601('2022-06-03')
-ARCHIVE = ARGV[0] || File.expand_path('~/code/github/markryall/zzz/tmp/generation-zzz.sqlite3')
+ARCHIVE = ARGV[0] || File.expand_path('~/.zzz_db/generationzzz.sqlite')
 
 abort "no archive at #{ARCHIVE}" unless File.exist?(ARCHIVE)
 
