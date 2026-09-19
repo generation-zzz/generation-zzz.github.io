@@ -144,6 +144,9 @@
   title: Sin Ti
 - artist: King Stingray
   title: Let's Go
+  tags:
+  - first nations
+  - australian
 - artist: The Beths
   title: Jump Rope Gazers
   tags:
@@ -191,6 +194,9 @@
   - local
 - artist: Clowns
   title: Does It Matter
+  tags:
+  - female
+  - australian
 - artist: Platonic Sex
   title: Devil's Advocate
   tags:
@@ -401,6 +407,9 @@
   - australian
 - artist: Eggy
   title: Gold and/or Silver
+  tags:
+  - female
+  - australian
 - artist: Pinch Points
   title: Reasons to be anxious
   tags:
@@ -848,6 +857,9 @@
   - female
 - artist: Girl And Girl
   title: Divorce 2
+  tags:
+  - local
+  - female
 - artist: Andrew Bird
   title: Underlands
 20:
@@ -1101,6 +1113,9 @@
   - gender diverse
 - artist: Edgar Hurley
   title: Have Arms Will Hug
+  tags:
+  - gender diverse
+  - australian
 - artist: Honeybeam
   title: Belong
   tags:
@@ -1396,6 +1411,9 @@
   title: Pistol
 - artist: Girl and Girl
   title: Divorce 2
+  tags:
+  - local
+  - female
 - artist: Platonic Sex
   title: Exhausted Competing For You
   tags:
@@ -1486,6 +1504,8 @@
   - female
 - artist: Hole
   title: Violet
+  tags:
+  - female
 - artist: Le Tigre
   title: Hot Topic
   tags:
@@ -1841,6 +1861,9 @@
   - australian
 - artist: Edgar Hurley
   title: Have Arms Will Hug
+  tags:
+  - gender diverse
+  - australian
 - artist: NOAHFINNCE
   title: After Therapy
   tags:
@@ -2041,6 +2064,9 @@
   - gender diverse
 - artist: Thus Love
   title: Put On Dog
+  tags:
+  - female
+  - gender diverse
 - artist: The Winfield Road Experiment
   title: The Meltdown
   tags:
@@ -2396,6 +2422,9 @@
   - australian
 - artist: The Empty Threats
   title: ATACB
+  tags:
+  - gender diverse
+  - australian
 - artist: The Love Inn
   title: Carnations
   tags:
@@ -2418,6 +2447,8 @@
   - australian
 - artist: The Trams
   title: The First Time
+  tags:
+  - local
 - artist: DARLING
   title: Paradise
   tags:
@@ -2452,6 +2483,9 @@
   - female
 - artist: WHALEHOUSE
   title: Cheato Doreeto
+  tags:
+  - local
+  - female
 - artist: Terra Pines
   title: Downbeat
   tags:
@@ -2675,6 +2709,10 @@
   - gender diverse
 - artist: Pillowlands
   title: Birthing Roundabout
+  tags:
+  - local
+  - female
+  - gender diverse
 - artist: Bean Magazine
   title: Nobody Wore Shoes
   tags:
@@ -2806,6 +2844,8 @@
   title: I See Myself
 - artist: Dirt City
   title: Squelch
+  tags:
+  - australian
 - artist: Joan & The Giants
   title: Sleep Alone
   tags:
@@ -2860,6 +2900,8 @@
   - australian
 - artist: The Far Outs
   title: Bad Thing
+  tags:
+  - local
 60:
 - artist: Joan & The Giants
   title: Home Song
@@ -3124,6 +3166,9 @@
   - female
 - artist: The Stress Of Leisure
   title: I Wanna Be Adult
+  tags:
+  - local
+  - female
 - artist: Smallest Horse
   title: Groceries
   tags:
@@ -3423,6 +3468,10 @@
   - female
 - artist: Cub Sport
   title: Replay
+  tags:
+  - local
+  - female
+  - gender diverse
 - artist: Sellma Soul
   title: Ambrosia
   tags:
@@ -3624,6 +3673,9 @@
   - female
 - artist: Clowns
   title: Does it Matter
+  tags:
+  - female
+  - australian
 - artist: Mitch, Please
   title: Rich Mitch
   tags:
@@ -4034,6 +4086,9 @@
   - australian
 - artist: The Empty Threats
   title: ATACB
+  tags:
+  - gender diverse
+  - australian
 - artist: Deafcult
   title: Sleep
   tags:
@@ -4226,6 +4281,10 @@
   - australian
 - artist: Charlie Needs Braces
   title: Saltwater People
+  tags:
+  - first nations
+  - female
+  - australian
 - artist: ENOLA
   title: Looking Back
   tags:
@@ -4586,6 +4645,9 @@
   title: Tropical Morning News
 - artist: Screamfeeder
   title: Hi Cs
+  tags:
+  - local
+  - female
 - artist: Custard
   title: Bedford
   tags:
@@ -4738,6 +4800,10 @@
 92:
 - artist: Worm Girlz
   title: Cool Girl
+  tags:
+  - local
+  - female
+  - gender diverse
 - artist: The Worm Turns
   title: O The Wind And Rain (Sister Mix)
   tags:
@@ -4945,6 +5011,8 @@
   title: Purge
 - artist: Windwaker
   title: Lucy
+  tags:
+  - australian
 - artist: Skindred
   title: Ninja
 - artist: Escape The Fate
@@ -5402,6 +5470,8 @@
   - australian
 - artist: Vanderlay
   title: Triumph and Disaster
+  tags:
+  - australian
 - artist: Jess Cornelius
   title: Laps in The Drugstore
   tags:
@@ -5644,6 +5714,8 @@
   - female
 - artist: Emiliana Torrini
   title: Miss Flower
+  tags:
+  - female
 - artist: Bjork
   title: Violently Happy
   tags:
@@ -5706,8 +5778,14 @@
   - gender diverse
 - artist: The Sundays
   title: Summertime
+  tags:
+  - female
 - artist: Miss Kaninna
   title: Push Up
+  tags:
+  - first nations
+  - female
+  - australian
 - artist: KRUNJ
   title: Lunatic
   tags:
@@ -5844,6 +5922,10 @@
   - female
 - artist: Miss Kaninna
   title: Push Up
+  tags:
+  - first nations
+  - female
+  - australian
 - artist: J-MILLA
   title: Boomerang
   tags:
@@ -6285,6 +6367,9 @@
   - australian
 - artist: Eggy
   title: Upon Reflection
+  tags:
+  - female
+  - australian
 - artist: Sonic Reducer
   title: One Of The Lads
   tags:
@@ -6359,6 +6444,10 @@
   - local
 - artist: Barkaa
   title: Alinta
+  tags:
+  - first nations
+  - female
+  - australian
 121:
 - artist: Alex The Astronaut
   title: Not Worth Hiding
@@ -6445,6 +6534,9 @@
   - australian
 - artist: Cardia
   title: To Quiet
+  tags:
+  - local
+  - first nations
 - artist: Lost Souls
   title: My Soldiers Rage
   tags:
@@ -6481,6 +6573,9 @@
   - australian
 - artist: Dreamkillers
   title: Suspicious Assumption
+  tags:
+  - local
+  - first nations
 - artist: Crossfaith
   title: Warriors
 123:
@@ -6968,6 +7063,8 @@
   title: It was supposed to be so easy
 - artist: Peaches
   title: Mommy Complex
+  tags:
+  - female
 - artist: Haters
   title: Last Night
   tags:
@@ -7236,6 +7333,9 @@
   - gender diverse
 - artist: The Snouts
   title: It Is What It Is
+  tags:
+  - local
+  - gender diverse
 - artist: Regurgitator
   title: Cocaine Runaway
   tags:
@@ -7286,6 +7386,8 @@
   - female
 - artist: New Order
   title: Bizarre Love Triangle
+  tags:
+  - female
 - artist: PJ Harvey
   title: This Mess We're In
   tags:
@@ -7565,6 +7667,9 @@
   - australian
 - artist: The Empty Threats
   title: ATACB
+  tags:
+  - gender diverse
+  - australian
 - artist: Great Job!
   title: I Havent Seen Harry Potter
   tags:
@@ -7679,6 +7784,8 @@
 143:
 - artist: mumdeathcake
   title: Black-Eyed Susan
+  tags:
+  - australian
 - artist: club bistro
   title: Mongol Boogie
   tags:
@@ -7860,6 +7967,8 @@
   - gender diverse
 - artist: The Babe Rainbow
   title: Aquarium Cowgirl
+  tags:
+  - australian
 - artist: Blue Stockings
   title: Strength
   tags:
@@ -7932,6 +8041,8 @@
   - female
 - artist: Hole
   title: Jennifers Body
+  tags:
+  - female
 - artist: L7
   title: Pretend We're Dead
   tags:
@@ -8455,6 +8566,9 @@
   - female
 - artist: SHADES
   title: Let Me Go
+  tags:
+  - local
+  - first nations
 156:
 - artist: Tjaka
   title: Marching Band
@@ -8485,6 +8599,10 @@
   - australian
 - artist: Jem Cassar-Daley
   title: Kiss Me Like You're Leaving
+  tags:
+  - local
+  - first nations
+  - female
 - artist: descentia
   title: The Ground Below Us
   tags:
@@ -8620,6 +8738,8 @@
   - female
 - artist: ABBA
   title: Dancing Queen
+  tags:
+  - australian
 - artist: The Beatles
   title: I saw her standing there
 - artist: Broken Social Scene
@@ -8742,6 +8862,9 @@
   - australian
 - artist: Folk Bitch Trio
   title: Moth Song
+  tags:
+  - female
+  - australian
 - artist: Tjaka
   title: Elevate (Intro)
   tags:
@@ -8955,6 +9078,8 @@
   - australian
 - artist: R.M.F.C.
   title: Ecstatic Strife
+  tags:
+  - australian
 - artist: Beryl
   title: Soft Floor
   tags:
@@ -8968,6 +9093,9 @@
   - female
 - artist: The Holy Rollercoasters
   title: Hair
+  tags:
+  - local
+  - female
 165:
 - artist: Big Noter
   title: Talk Straight
@@ -8986,6 +9114,10 @@
   - first nations
 - artist: Sunny Luwe
   title: Blue Skies
+  tags:
+  - local
+  - first nations
+  - female
 - artist: Karl Frog
   title: Legends of the Niche
   tags:
@@ -9011,6 +9143,9 @@
   - female
 - artist: The Holy Rollercoasters
   title: Hair
+  tags:
+  - local
+  - female
 - artist: The Double Happiness
   title: Sister Bertrille
   tags:
@@ -9023,6 +9158,8 @@
   - australian
 - artist: R.M.F.C.
   title: Ecstatic Strife
+  tags:
+  - australian
 166:
 - artist: Smote
   title: Sitting Stone Pt. 2.
@@ -9084,6 +9221,9 @@
   - local
 - artist: The Double Happiness
   title: Omnibus
+  tags:
+  - local
+  - female
 - artist: Mid Drift
   title: Washed
   tags:
@@ -9146,6 +9286,9 @@
   - local
 - artist: The Double Happiness
   title: Omnibus
+  tags:
+  - local
+  - female
 - artist: Screamfeeder
   title: Wrote You Off ft. Adalita
   tags:
@@ -9228,6 +9371,8 @@
   title: Changing Light
 - artist: Surprise Chef
   title: Websites
+  tags:
+  - australian
 - artist: The CB3, XANI
   title: Teacups and Candy feat. XANI
   tags:
@@ -9305,6 +9450,8 @@
   - female
 - artist: Dante Bardell
   title: WOBBA WOBBA
+  tags:
+  - local
 - artist: Birds Are Fake
   title: Subliminal Warning
   tags:
@@ -9336,6 +9483,8 @@
   - local
 - artist: Cast Iron Tower
   title: Turn Your Head
+  tags:
+  - local
 - artist: DAMIEN
   title: One in a Billion
   tags:
@@ -9502,8 +9651,13 @@
   - local
 - artist: In Constance
   title: Fairytale
+  tags:
+  - local
+  - female
 - artist: Germinator
   title: Are You Being Served?
+  tags:
+  - local
 - artist: sleepazoid
   title: NEW AGE
   tags:
@@ -10168,6 +10322,10 @@
   - female
 - artist: VOIID
   title: Anatomy of a Hug
+  tags:
+  - local
+  - female
+  - gender diverse
 - artist: WAAX
   title: Hands
   tags:
@@ -10183,6 +10341,8 @@
   - local
 - artist: Valve
   title: silent witness
+  tags:
+  - local
 - artist: Dizzy Days
   title: It's Me It's Not You
   tags:
@@ -10190,6 +10350,8 @@
   - female
 - artist: Verminate
   title: Hit and Run (feat Born 2 Lose)
+  tags:
+  - local
 - artist: War Bear
   title: Slug God
   tags:
@@ -10227,6 +10389,8 @@
   - female
 - artist: Toxic Bears
   title: Suddenly Clear
+  tags:
+  - local
 - artist: Monster Zoku Onsomb!
   title: Outsider (Single)
   tags:
@@ -10358,6 +10522,8 @@
   - female
 - artist: Suspect Seven
   title: Heaven Sent
+  tags:
+  - local
 - artist: The Gin Club
   title: Days
   tags:
@@ -10427,6 +10593,8 @@
   - local
 - artist: Red Velvet Rascal
   title: Humanoid Mechanic
+  tags:
+  - local
 - artist: Alisa Maekinen
   title: The World Burns With Us
   tags:
@@ -10434,6 +10602,8 @@
   - female
 - artist: Understeer
   title: Clarity
+  tags:
+  - local
 - artist: Jarvis Floyd
   title: Dumb
   tags:
@@ -10520,6 +10690,8 @@
   - female
 - artist: Red Velvet Rascal
   title: Humanoid Mechanic
+  tags:
+  - local
 - artist: Loose Content
   title: Newsreader
   tags:
@@ -10644,6 +10816,9 @@
   - female
 - artist: The CuckWho’s
   title: Pentridge Paradise
+  tags:
+  - local
+  - gender diverse
 - artist: Astrid
   title: Dirt Road
   tags:
@@ -10720,6 +10895,8 @@
   - gender diverse
 - artist: The Slow Point
   title: Get it Right
+  tags:
+  - local
 - artist: Two Star
   title: Charlie
   tags:
@@ -10756,6 +10933,8 @@
   - australian
 - artist: Cloning
   title: Finite Grace
+  tags:
+  - australian
 - artist: HighSchool
   title: Peter's Room
   tags:
@@ -10763,6 +10942,8 @@
 191:
 - artist: Peaches
   title: Fuck Your Face
+  tags:
+  - female
 - artist: Gashhound
   title: Lighter Required
   tags:
@@ -10828,6 +11009,9 @@
   - gender diverse
 - artist: The CuckWho’s
   title: Pentridge Paradise
+  tags:
+  - local
+  - gender diverse
 - artist: Cuckoo Coco
   title: Thirty-One
   tags:
@@ -10836,6 +11020,8 @@
   - gender diverse
 - artist: Spektrum
   title: Back The Fuck Up
+  tags:
+  - local
 - artist: The Disgruntled Taxpayers
   title: So Fucked
   tags:
@@ -11122,6 +11308,9 @@
   - female
 - artist: Alison
   title: Ugly Fish
+  tags:
+  - local
+  - female
 - artist: 1tbsp
   title: Soulseek (feat. Soltera)
   tags:
@@ -11129,6 +11318,9 @@
 195:
 - artist: Alison
   title: Ugly Fish
+  tags:
+  - local
+  - female
 - artist: The Fauves
   title: Dogs Are The Best People
   tags:
@@ -11285,6 +11477,9 @@
   - female
 - artist: Alison
   title: Ugly Fish
+  tags:
+  - local
+  - female
 - artist: Super Hotel
   title: Driving at Dusk
   tags:
@@ -11352,6 +11547,9 @@
   - gender diverse
 - artist: Alison
   title: Ugly Fish
+  tags:
+  - local
+  - female
 - artist: Worm Girlz
   title: Not My Body
   tags:
@@ -11371,6 +11569,9 @@
   - gender diverse
 - artist: Swapmeet
   title: I Know!
+  tags:
+  - female
+  - australian
 - artist: Teen Jesus and the Jean Teasers
   title: Girl Sports
   tags:
@@ -11629,6 +11830,8 @@
   - local
 - artist: Gravel Samwidge
   title: Cheap Regrets
+  tags:
+  - local
 - artist: Beaudi Dwan
   title: Frames
   tags:
@@ -11981,6 +12184,10 @@
   - gender diverse
 - artist: VOIID
   title: Anatomy of a Hug
+  tags:
+  - local
+  - female
+  - gender diverse
 - artist: Blussh
   title: Blue
   tags:
@@ -12064,6 +12271,9 @@
   - female
 - artist: Pussy Jane
   title: Gym Slutz
+  tags:
+  - local
+  - female
 - artist: Baby Cool
   title: Sacred
   tags:
@@ -12710,6 +12920,8 @@
   title: Sounds We Cannot Hear
 - artist: Creekbed Carter Hogan
   title: Game of Pretend
+  tags:
+  - gender diverse
 218:
 - artist: Pnau
   title: Chemistry feat. Master Peace
@@ -13041,6 +13253,8 @@
   - female
 - artist: Sleater-Kinney
   title: Youth Decay
+  tags:
+  - female
 - artist: Yeah Yeah Yeahs
   title: Art Star
   tags:
