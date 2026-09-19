@@ -1,0 +1,86 @@
+#!/usr/bin/env ruby
+
+# Writes episodes.yml and tracks.yml out of the show's database.
+#
+#   bin/export [path/to/show.sqlite]
+#
+# The database is kept by the zzz gem (https://github.com/markryall/zzz):
+# `zzz_describe` records what each episode was about, and `zzz_archive` and
+# `zzz_enrich` record what was played and what 4zzz says about it. Only the
+# sqlite3 command line tool is needed here, so the site stays dependency free.
+#
+# Both files stay committed rather than the site reading the database at build
+# time: that keeps this repository buildable on its own, by anyone, from a
+# clone - and it keeps every change to the site visible as a diff.
+
+require 'date'
+require 'json'
+require 'yaml'
+
+START_DATE = Date.iso8601('2022-06-03')
+SHOW_DB = ARGV[0] || File.expand_path('~/.zzz_db/generationzzz.sqlite')
+
+abort "no show database at #{SHOW_DB}" unless File.exist?(SHOW_DB)
+
+def query(sql)
+  raw = `sqlite3 -json "file:#{SHOW_DB}?mode=ro" #{sql.gsub("\n", ' ').inspect}`
+  abort 'sqlite3 failed' unless $?.success?
+  raw.strip.empty? ? [] : JSON.parse(raw)
+end
+
+# ------------------------------------------------------------- descriptions
+
+# episodes.yml is positional - the first entry is episode 1 - so it can only
+# run as far as the episodes described without a gap. A description recorded
+# against a later episode with nothing in between (a test episode, or next
+# week written up early) would otherwise pad the file with hundreds of blanks.
+described = query(<<~SQL).to_h { |row| [row['episode'].to_i, row['description']] }
+  SELECT episode, description FROM show_plans
+  WHERE description IS NOT NULL AND description <> ''
+SQL
+
+last = (1..described.keys.max.to_i).find { |n| described[n].nil? }
+last = last ? last - 1 : described.keys.max.to_i
+beyond = described.keys.select { |n| n > last }.sort
+
+abort 'no episodes described' if last.zero?
+
+File.write('episodes.yml', (1..last).map { |n| described[n] }.to_yaml)
+puts "episodes.yml: #{last} episodes"
+puts "  (ignored #{beyond.join(', ')} - described but not contiguous)" unless beyond.empty?
+
+# ------------------------------------------------------------------ tracks
+
+# the flags are what 4zzz records against the release, and they are what the
+# station counts for its content quotas. a missing flag means the release was
+# never identified, not that the answer is no - so nothing is shown for it.
+TAGS = { 'is_local' => 'local', 'is_first_nations' => 'first nations',
+         'is_female' => 'female', 'is_gender_diverse' => 'gender diverse',
+         'is_australian' => 'australian' }.freeze
+
+plays = query(<<~SQL)
+  SELECT e.aired_on, p.position, p.artist, p.title,
+         r.is_local, r.is_australian, r.is_first_nations,
+         r.is_female, r.is_gender_diverse
+  FROM plays p
+  JOIN episodes e ON e.id = p.episode_id
+  LEFT JOIN tracks t ON t.artist_key = lower(trim(p.artist))
+                    AND t.title_key = lower(trim(p.title))
+  LEFT JOIN releases r ON r.library_no = t.library_no
+  ORDER BY e.aired_on, p.position
+SQL
+
+episodes = Hash.new { |hash, key| hash[key] = [] }
+plays.each do |row|
+  number = ((Date.iso8601(row['aired_on']) - START_DATE) / 7).to_i + 1
+  tags = TAGS.filter_map { |column, tag| tag if row[column].to_i == 1 }
+  # local already says australian, and saying both on every local track
+  # buries the tags that are actually telling you something
+  tags -= ['australian'] if tags.include?('local')
+  track = { 'artist' => row['artist'].strip, 'title' => row['title'].strip }
+  track['tags'] = tags unless tags.empty?
+  episodes[number] << track
+end
+
+File.write('tracks.yml', episodes.sort.to_h.to_yaml)
+puts "tracks.yml: #{episodes.length} episodes, #{episodes.values.sum(&:length)} tracks"
