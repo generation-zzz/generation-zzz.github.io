@@ -58,15 +58,23 @@ TAGS = { 'is_local' => 'local', 'is_first_nations' => 'first nations',
          'is_female' => 'female', 'is_gender_diverse' => 'gender diverse',
          'is_australian' => 'australian' }.freeze
 
+# the library is the authority where it has an answer, and what was worked
+# out by hand fills the gaps - the same order zzz_quota reads them in. A
+# release flag is about the release and a hand one is about the artist, so
+# they are not quite the same claim, but for "who did we play" they serve.
 plays = query(<<~SQL)
   SELECT e.aired_on, p.position, p.artist, p.title,
-         r.is_local, r.is_australian, r.is_first_nations,
-         r.is_female, r.is_gender_diverse
+         COALESCE(r.is_local,          m.is_local)          AS is_local,
+         COALESCE(r.is_australian,     m.is_australian)     AS is_australian,
+         COALESCE(r.is_first_nations,  m.is_first_nations)  AS is_first_nations,
+         COALESCE(r.is_female,         m.is_female)         AS is_female,
+         COALESCE(r.is_gender_diverse, m.is_gender_diverse) AS is_gender_diverse
   FROM plays p
   JOIN episodes e ON e.id = p.episode_id
   LEFT JOIN tracks t ON t.artist_key = lower(trim(p.artist))
                     AND t.title_key = lower(trim(p.title))
   LEFT JOIN releases r ON r.library_no = t.library_no
+  LEFT JOIN manual_artists m ON m.artist_key = lower(trim(p.artist))
   ORDER BY e.aired_on, p.position
 SQL
 
